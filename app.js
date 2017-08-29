@@ -12,8 +12,8 @@ app.engine('mustache', mustacheExpress());
 app.set('views', './views');
 app.set('view engine', 'mustache');
 app.use(express.static(__dirname + '/public'));
-app.use(body.json());
-app.use(body.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', function(req, res) {
   res.send('Confirming');
