@@ -14,6 +14,11 @@ app.set('view engine', 'mustache');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+ secret: 'mystery word',
+ resave: false,
+ saveUninitalized: true
+}));
 
 app.get('/', function(req, res) {
   res.send('Confirming');
