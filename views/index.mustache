@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <head>
-
+  <title>Mystery Word Guess</title>
+  <link href="/styles.css" type="text/css" rel="stylesheet" />
 </head>
+
+<body>
+  <h1>Mystery Word Game</h1>
+  <div class="">
+    <ul>
+      {{#splitWord}}
+        <li>{{.}}</li>
+      {{/splitWord}}
+    </ul>
+  </div>
+
+  <form class="guess" action="." method="post">
+      <input type="text" name="guess" placeholder="Guess a letter!" maxlength="1" autofocus required/>
+      <button type="submit">Submit</button>
+  </form>
+
+  <div>
+    <p>
+      Guessed letters: {{guessedLetters}}
+    </p>
+  </div>
+
+</body>
 
 </html>
