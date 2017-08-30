@@ -23,12 +23,18 @@ app.use(session({
 
 // game variables
 let randomWord = words[Math.floor(Math.random() * words.length)]; // "words" is defined in line 6
+console.log(randomWord);
+let splitWord = [...randomWord];
+console.log(splitWord);
+let guessWord = splitWord.fill('');
+console.log(guessWord);
+let guessedLetters = [];
 
 
 
 
 app.get('/', function(req, res) {
-  res.send('Confirming');
+  res.render('index', {splitWord, guessWord});
 })
 
 
