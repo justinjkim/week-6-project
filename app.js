@@ -20,6 +20,13 @@ app.use(session({
  saveUninitalized: true
 }));
 
+
+// game variables
+let randomWord = words[Math.floor(Math.random() * words.length)]; // "words" is defined in line 6
+
+
+
+
 app.get('/', function(req, res) {
   res.send('Confirming');
 })
