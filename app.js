@@ -34,7 +34,7 @@ let guessedLetters = [];
 
 
 app.get('/', function(req, res) {
-  res.render('index', {splitWord, guessWord});
+  res.render('index', {splitWord, guessWord, guessedLetters});
 })
 
 
