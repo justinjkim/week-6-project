@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <head>
   <title>Mystery Word Guess</title>
+  <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta20/shoelace.css" />
   <link href="/styles.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
   <h1>Mystery Word Game</h1>
+  <h3>Created by Justin Kim</h3>
   <div class="">
+    <p>
+      {{randomWord}}
+    </p>
+
+
     <ul>
-      {{#splitWord}}
-        <li>{{.}}</li>
-      {{/splitWord}}
+      {{#splitWord.word}}
+      <li>
+        {{.}}
+      </li>
+      {{/splitWord.word}}
     </ul>
+
+
   </div>
 
   <form class="guess" action="." method="post">
       <input type="text" name="guess" placeholder="Guess a letter!" maxlength="1" autofocus required/>
+      <br />
       <button type="submit">Submit</button>
   </form>
 
@@ -25,6 +37,7 @@
     </p>
   </div>
 
+<script src="https://cdn.shoelace.style/1.0.0-beta20/shoelace.js"></script>
 </body>
 
 </html>
