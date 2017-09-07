@@ -31,12 +31,12 @@ for (let i = 0; i < words.length; i++) {
 let randomWord = trimmed[Math.floor(Math.random() * trimmed.length)]; // "words" is defined in line 6
 console.log(randomWord);
 
-let splitWord = [...randomWord];
+const splitWord = [...randomWord];
 console.log(splitWord);
 
-let hiddenWord = [...randomWord];
+let extraArray = [...randomWord];
 
-let guessWord = hiddenWord.fill('_');
+let guessWord = extraArray.fill('_');
 console.log(guessWord);
 
 let guessedLetters = [];
@@ -64,14 +64,11 @@ app.listen(3000, function(req, res) {
 })
 
 function validateWord(guess) {
-  for (let j = 0; j < splitWord.length; j++) {
-    if (guess === splitWord[j]) {
-      guessedLetters.push(guess);
-      correctLetters.push(guess);
-    }
-    else {
-      guessedLetters.push(guess);
-      guessesLeft -= 1;
-    }
-  } // end of for loop
+  if (splitWord.includes(guess)) {
+    let correctGuess = splitWord.indexOf(guess);
+    guessWord[correctGuess] = guess;
+  }
+  else {
+    guessesLeft -= 1;
+  }
 }
