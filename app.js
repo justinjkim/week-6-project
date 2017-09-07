@@ -4,7 +4,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
-let trimmed = [];
 
 const app = express();
 
@@ -21,37 +20,41 @@ app.use(session({
  saveUninitalized: true
 }));
 
-
-// game variables
+// for now, only choose words that are 10 letters or less
+let trimmed = [];
 for (let i = 0; i < words.length; i++) {
-  if (words[i].length < 10) {
+  if (words[i].length <= 10) {
     trimmed.push(words[i]);
   }
 }
+
 let randomWord = trimmed[Math.floor(Math.random() * trimmed.length)]; // "words" is defined in line 6
 console.log(randomWord);
 
-let splitWord = {};
-splitWord.word = [...randomWord];
+let splitWord = [...randomWord];
 console.log(splitWord);
 
-// let guessWord = splitWord.fill('');
-// console.log(guessWord);
+let hiddenWord = [...randomWord];
+
+let guessWord = hiddenWord.fill('_');
+console.log(guessWord);
 
 let guessedLetters = [];
-
-
+let correctLetters = [];
+let guessesLeft = 8;
 
 
 app.get('/', function(req, res) {
-  res.render('index', {randomWord, splitWord, guessedLetters});
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters});
+  req.session.word = randomWord; // do I need this?
+  console.log('The req.session.word is ' + req.session.word);
 });
 
 app.post('/', function(req, res) {
-  let guess = req.body.guess;
+  let guess = req.body.guess.toLowerCase();
   validateWord(guess);
   console.log(guess);
-  res.render('index', {splitWord, guessWord, guessedLetters})
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters})
 })
 
 
@@ -61,10 +64,14 @@ app.listen(3000, function(req, res) {
 })
 
 function validateWord(guess) {
-  if (splitWord.includes(guess)) {
-    let correctGuess = splitWord.indexOf(guess);
-  }
-  else {
-    guessedLetters.push(guess);
-  }
+  for (let j = 0; j < splitWord.length; j++) {
+    if (guess === splitWord[j]) {
+      guessedLetters.push(guess);
+      correctLetters.push(guess);
+    }
+    else {
+      guessedLetters.push(guess);
+      guessesLeft -= 1;
+    }
+  } // end of for loop
 }
