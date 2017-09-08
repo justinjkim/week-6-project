@@ -42,10 +42,10 @@ console.log(guessWord);
 let guessedLetters = [];
 let correctLetters = [];
 let guessesLeft = 8;
-
+let loss = '';
 
 app.get('/', function(req, res) {
-  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters});
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss});
   req.session.word = randomWord; // do I need this?
   console.log('The req.session.word is ' + req.session.word);
 });
@@ -54,7 +54,7 @@ app.post('/', function(req, res) {
   let guess = req.body.guess.toLowerCase();
   validateWord(guess);
   console.log(guess);
-  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters})
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss})
 })
 
 
@@ -70,5 +70,9 @@ function validateWord(guess) {
   }
   else {
     guessesLeft -= 1;
+    if (guessesLeft === 0) {
+      loss = 'Sorry! You lost!';
+      res.redirect('/lost');
+    }
   }
-}
+} // end of validateWord()
