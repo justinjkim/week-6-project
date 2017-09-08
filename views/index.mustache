@@ -8,20 +8,29 @@
 <body>
   <h1>Mystery Word Game</h1>
   <h3>Created by Justin Kim</h3>
+
+  <p>
+    Guess left: {{guessesLeft}}
+  </p>
+  <p>
+    {{loss}}
+  </p>
   <div class="">
     <p>
       {{randomWord}}
     </p>
 
+    <p>
+      {{#splitWord}}
+      {{.}}
+      {{/splitWord}}
+    </p>
 
-    <ul>
-      {{#splitWord.word}}
-      <li>
+    <p>
+      {{#guessWord}}
         {{.}}
-      </li>
-      {{/splitWord.word}}
-    </ul>
-
+      {{/guessWord}}
+    </p>
 
   </div>
 
@@ -34,6 +43,9 @@
   <div>
     <p>
       Guessed letters: {{guessedLetters}}
+    </p>
+    <p>
+      Correctly guessed letters: {{correctLetters}}
     </p>
   </div>
 
