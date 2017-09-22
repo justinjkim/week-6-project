@@ -43,9 +43,11 @@ let guessedLetters = [];
 let correctLetters = [];
 let guessesLeft = 8;
 let loss = '';
+let alreadyGuessed = '';
+let correctlyGuessed = '';
 
 app.get('/', function(req, res) {
-  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss});
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss, alreadyGuessed, correctlyGuessed});
   req.session.word = randomWord; // do I need this?
   console.log('The req.session.word is ' + req.session.word);
 });
@@ -54,7 +56,7 @@ app.post('/', function(req, res) {
   let guess = req.body.guess.toLowerCase();
   validateWord(guess);
   console.log(guess);
-  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss})
+  res.render('index', {randomWord, guessesLeft, splitWord, guessWord, guessedLetters, correctLetters, loss, alreadyGuessed, correctlyGuessed});
 })
 
 
@@ -64,8 +66,13 @@ app.listen(3000, function(req, res) {
 })
 
 function validateWord(guess) {
-  if (splitWord.includes(guess)) {
-    let correctGuess = splitWord.indexOf(guess);    
+
+  if (guessedLetters.includes(guess)) {
+    alreadyGuessed = 'You already guessed that letter! Try a different one.';
+  }
+  else if (splitWord.includes(guess)) {
+    let correctGuess = splitWord.indexOf(guess);
+    correctlyGuessed = 'Great guess! Take another stab';
     while (~correctGuess) {
       guessWord[correctGuess] = guess;
       correctGuess = splitWord.indexOf(guess, correctGuess + 1);
@@ -74,9 +81,7 @@ function validateWord(guess) {
     correctLetters.push(guess);
     guessedLetters.push(guess);
   }
-  else if ( /*need a condition to mark out already guessed letters */) {
 
-  }
   else {
     guessesLeft -= 1;
     guessedLetters.push(guess);
