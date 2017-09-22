@@ -52,6 +52,12 @@ app.get('/', function(req, res) {
   console.log('The req.session.word is ' + req.session.word);
 });
 
+app.get('/redo', function(req, res) {
+  req.session.word = randomWord;
+  console.log('The req.session.word is ' + req.session.word);
+  res.redirect('/');  
+});
+
 app.post('/', function(req, res) {
   let guess = req.body.guess.toLowerCase();
   validateWord(guess);
