@@ -9,17 +9,23 @@
   <h1>Mystery Word Game</h1>
   <h3>Created by Justin Kim</h3>
 
-  <p>
+  <kbd>
     Guess left: {{guessesLeft}}
-  </p>
+  </kbd>
 
   {{#loss}}
   <p class="alert alert-danger">{{loss}}
   </p>
+  <a href="/redo">Try again?</a>
   {{/loss}}
 
+  <p>
+    <!-- simple break -->
+  </p>
+
   <div class="">
-    <p>
+    <!-- commenting this section out -->
+    <!-- <p>
       {{randomWord}}
     </p>
 
@@ -27,7 +33,7 @@
       {{#splitWord}}
       {{.}}
       {{/splitWord}}
-    </p>
+    </p> -->
 
     <p>
       {{#guessWord}}
