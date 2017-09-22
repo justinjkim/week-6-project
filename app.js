@@ -67,12 +67,12 @@ function validateWord(guess) {
   if (splitWord.includes(guess)) {
     let correctGuess = splitWord.indexOf(guess);
     guessWord[correctGuess] = guess;
+    correctLetters.push(guess);
   }
   else {
     guessesLeft -= 1;
     if (guessesLeft === 0) {
-      loss = 'Sorry! You lost!';
-      res.redirect('/lost');
+      loss = 'Sorry! You lost! The word was: ' + randomWord;
     }
   }
 } // end of validateWord()
