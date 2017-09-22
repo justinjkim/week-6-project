@@ -47,6 +47,12 @@
   </p>
 
   <div>
+    {{#alreadyGuessed}}
+    <p class="alert alert-warning">
+      {{alreadyGuessed}}
+    </p>
+    {{/alreadyGuessed}}
+
     <p>
       Guessed letters: {{guessedLetters}}
     </p>
