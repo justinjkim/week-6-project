@@ -41,7 +41,7 @@ console.log(guessWord);
 
 let guessedLetters = [];
 let correctLetters = [];
-let guessesLeft = 3;
+let guessesLeft = 8;
 let loss = '';
 
 app.get('/', function(req, res) {
@@ -65,7 +65,7 @@ app.listen(3000, function(req, res) {
 
 function validateWord(guess) {
   if (splitWord.includes(guess)) {
-    let correctGuess = splitWord.indexOf(guess);
+    let correctGuess = splitWord.indexOf(guess);    
     while (~correctGuess) {
       guessWord[correctGuess] = guess;
       correctGuess = splitWord.indexOf(guess, correctGuess + 1);
@@ -73,6 +73,9 @@ function validateWord(guess) {
 
     correctLetters.push(guess);
     guessedLetters.push(guess);
+  }
+  else if ( /*need a condition to mark out already guessed letters */) {
+
   }
   else {
     guessesLeft -= 1;
