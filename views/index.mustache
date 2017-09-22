@@ -12,9 +12,12 @@
   <p>
     Guess left: {{guessesLeft}}
   </p>
-  <p>
-    {{loss}}
+
+  {{#loss}}
+  <p class="alert alert-danger">{{loss}}
   </p>
+  {{/loss}}
+
   <div class="">
     <p>
       {{randomWord}}
@@ -39,6 +42,9 @@
       <br />
       <button type="submit">Submit</button>
   </form>
+
+  <p> <!--Simple page break -->
+  </p>
 
   <div>
     <p>
