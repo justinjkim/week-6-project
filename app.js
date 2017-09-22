@@ -41,7 +41,7 @@ console.log(guessWord);
 
 let guessedLetters = [];
 let correctLetters = [];
-let guessesLeft = 8;
+let guessesLeft = 3;
 let loss = '';
 
 app.get('/', function(req, res) {
@@ -66,11 +66,17 @@ app.listen(3000, function(req, res) {
 function validateWord(guess) {
   if (splitWord.includes(guess)) {
     let correctGuess = splitWord.indexOf(guess);
-    guessWord[correctGuess] = guess;
+    while (~correctGuess) {
+      guessWord[correctGuess] = guess;
+      correctGuess = splitWord.indexOf(guess, correctGuess + 1);
+    }
+
     correctLetters.push(guess);
+    guessedLetters.push(guess);
   }
   else {
     guessesLeft -= 1;
+    guessedLetters.push(guess);
     if (guessesLeft === 0) {
       loss = 'Sorry! You lost! The word was: ' + randomWord;
     }
