@@ -40,15 +40,15 @@
   <form class="guess" action="." method="post">
       <input type="text" name="guess" placeholder="Guess a letter!" maxlength="1" autofocus required/>
       <br />
-      <button type="submit">Submit</button>
+      <button type="submit" id="submit">Submit</button>
   </form>
 
   <p> <!--Simple page break -->
   </p>
 
-  <div>
+  <div id="letterTracker">
     {{#alreadyGuessed}}
-    <p class="alert alert-warning">
+    <p class="alert alert-warning" id="alreadyGuessed">
       {{alreadyGuessed}}
     </p>
     {{/alreadyGuessed}}
@@ -62,6 +62,7 @@
   </div>
 
 <script src="https://cdn.shoelace.style/1.0.0-beta20/shoelace.js"></script>
+<script src="/script.js"></script>
 </body>
 
 </html>
