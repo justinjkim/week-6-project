@@ -71,6 +71,7 @@ function validateWord(guess) {
   }
   else if (splitWord.includes(guess)) {
     let correctGuess = splitWord.indexOf(guess);
+    alreadyGuessed = '';
     while (~correctGuess) {
       guessWord[correctGuess] = guess;
       correctGuess = splitWord.indexOf(guess, correctGuess + 1);
